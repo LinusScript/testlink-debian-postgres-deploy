@@ -33,6 +33,14 @@ im Hauptverzeichnis sind später dein Spickzettel für Prod, wenn du das schon v
 | 7 | [Web-Installer durchklicken](07-web-installer.md) | Der PHP-Installations-Assistent, was im Hintergrund passiert |
 | 8 | [Verifikation & Debugging-Handwerkszeug](08-verification-debugging.md) | Logs lesen, Fehler eingrenzen — die Fähigkeit, die dich als Azubi weiterbringt |
 | 9 | [Absichern & Brücke zu Prod](09-hardening-and-prod.md) | Was du für Prod änderst, was gleich bleibt |
+| 10 | [Migrationskonzept](10-migrationskonzept.md) | Warum App-Version-Update und DB-Engine-Wechsel getrennte Probleme sind |
+| 11 | [Migration Schritt 1: App-Upgrade](11-migration-schritt1-app-upgrade.md) | TestLink 1.9.16 → 1.9.20 manuell per SQL, MySQL bleibt MySQL |
+| 12 | [Migration Schritt 2: DB-Wechsel](12-migration-schritt2-db-wechsel.md) | MySQL → PostgreSQL mit `pgloader`, gleiche TestLink-Version |
+
+Die Kapitel 10–12 bilden die **echte geplante Migration** nach: Produktion läuft aktuell auf TestLink
+1.9.16 mit MySQL/MariaDB, Ziel ist PostgreSQL. Sie setzen auf Kapitel 0–9 auf (dieselbe Demo-VM, dieselbe
+PostgreSQL-Instanz) und sind der eigentliche Zweck dieses gesamten Lernpfads: Der hier auf der Demo-VM
+getestete Weg wird später 1:1 auf die Produktivinstanz angewendet.
 
 ## Verhältnis zu den anderen Dateien in diesem Repo
 

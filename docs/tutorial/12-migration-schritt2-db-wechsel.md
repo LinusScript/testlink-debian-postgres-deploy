@@ -168,13 +168,8 @@ Umzug einen frischen MySQL-Dump als Fallback sichern, dann erst migrieren.
 
 ## Von der Demo zur echten Migration
 
-Diese beiden Kapitel haben dir den kompletten Weg gezeigt — mit synthetischen 1.9.16-Standarddaten statt
-echten Produktivdaten. Für den echten Umzug ändert sich am **Ablauf** nichts, nur an den Eingaben:
-
-- Statt `testlink_create_default_data.sql` verwendest du einen echten Dump der Produktions-MySQL-Datenbank
-  (von deinem Kollegen, siehe die Nachricht, die du ihm geschickt hast).
-- Du brauchst ein abgestimmtes **Wartungsfenster** (Downtime), weil während der Migration niemand mehr in
-  TestLink arbeiten darf.
-- Ein frischer MySQL-Dump unmittelbar vor der Migration ist dein Rollback-Plan, falls etwas schiefgeht.
-- Führe **exakt diese Schritte in derselben Reihenfolge** aus, die du hier bereits erfolgreich getestet
-  hast — das ist der ganze Sinn dieses Repos.
+Die Kapitel 10–12 haben dir den kompletten **Mechanismus** gezeigt — mit synthetischen
+1.9.16-Standarddaten statt echten Produktivdaten. Bei echten Daten kommen aber ein paar Dinge dazu, die
+mit Testdaten nicht auffallen (Datei-Anhänge außerhalb der Datenbank, Zeichensatz-Fallstricke, eine
+lückenlose statt stichprobenartige Verifikation) — das ist genau das Thema von
+[Kapitel 13: Vollständigkeits-Check](13-vollstaendigkeit-produktivmigration.md).

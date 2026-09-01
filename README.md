@@ -8,9 +8,11 @@ den exakt gleichen Prozess später produktiv nachzubauen.
 
 Das ist kein rein hypothetisches Übungsprojekt: Produktiv läuft aktuell **TestLink 1.9.16 auf
 MySQL/MariaDB**, Ziel ist die Migration auf PostgreSQL. Kapitel 0–9 des Lernpfads bauen zunächst die
-**Zielumgebung** (aktuelle TestLink-Version + PostgreSQL) als Demo auf; Kapitel 10–12 bilden anschließend
-die **eigentliche Migration** (alte Version + MySQL → neue Version + PostgreSQL) nach, mit Erklärung der
-Hintergründe, nicht nur der Befehle — siehe [`docs/tutorial/10-migrationskonzept.md`](docs/tutorial/10-migrationskonzept.md).
+**Zielumgebung** (aktuelle TestLink-Version + PostgreSQL) als Demo auf; Kapitel 10–13 bilden anschließend
+die **eigentliche Migration** nach — Konzept, App-Upgrade, DB-Engine-Wechsel und ein vollständiger
+Verifikations-/Produktivdaten-Leitfaden (Datei-Anhänge, echter `mysqldump`, alle Tabellen statt
+Stichproben) — mit Erklärung der Hintergründe, nicht nur der Befehle. Start:
+[`docs/tutorial/10-migrationskonzept.md`](docs/tutorial/10-migrationskonzept.md).
 
 TestLink wird offiziell primär mit MySQL/MariaDB dokumentiert und containerisiert (siehe `docker-compose.yml` im Original-Repo).
 PostgreSQL wird vom Web-Installer aber vollständig unterstützt (`install/installDbInput.php`, `install/installNewDB.php`,

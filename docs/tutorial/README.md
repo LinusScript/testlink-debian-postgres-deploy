@@ -36,8 +36,9 @@ im Hauptverzeichnis sind später dein Spickzettel für Prod, wenn du das schon v
 | 10 | [Migrationskonzept](10-migrationskonzept.md) | Warum App-Version-Update und DB-Engine-Wechsel getrennte Probleme sind |
 | 11 | [Migration Schritt 1: App-Upgrade](11-migration-schritt1-app-upgrade.md) | TestLink 1.9.16 → 1.9.20 manuell per SQL, MySQL bleibt MySQL |
 | 12 | [Migration Schritt 2: DB-Wechsel](12-migration-schritt2-db-wechsel.md) | MySQL → PostgreSQL mit `pgloader`, gleiche TestLink-Version |
+| 13 | [Vollständigkeits-Check](13-vollstaendigkeit-produktivmigration.md) | Anhänge im Dateisystem, echter Produktivdump, alle ~58 Tabellen verifizieren statt Stichproben |
 
-Die Kapitel 10–12 bilden die **echte geplante Migration** nach: Produktion läuft aktuell auf TestLink
+Die Kapitel 10–13 bilden die **echte geplante Migration** nach: Produktion läuft aktuell auf TestLink
 1.9.16 mit MySQL/MariaDB, Ziel ist PostgreSQL. Sie setzen auf Kapitel 0–9 auf (dieselbe Demo-VM, dieselbe
 PostgreSQL-Instanz) und sind der eigentliche Zweck dieses gesamten Lernpfads: Der hier auf der Demo-VM
 getestete Weg wird später 1:1 auf die Produktivinstanz angewendet.

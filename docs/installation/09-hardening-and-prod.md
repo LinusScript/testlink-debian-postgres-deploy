@@ -87,7 +87,10 @@ Apache reicht Anfragen über das FastCGI-Protokoll an diesen Pool weiter (`mod_p
 in seine eigenen Worker einzubetten. Vorteil: Apache kann dabei beim schnelleren `event`-MPM bleiben (siehe
 Kapitel 2), und PHP-Prozesse lassen sich unabhängig von Apache skalieren/neu starten. Nachteil: eine
 bewegliche Komponente mehr, etwas komplexeres Debugging (zwei Prozesse statt einem). Für den Einstieg und
-diesen Lernpfad ist `mod_php` bewusst die einfachere Wahl.
+diesen Lernpfad ist `mod_php` bewusst die einfachere Wahl. Konkrete Umstellungsschritte (inklusive
+Connection Pooling für PostgreSQL) stehen in
+[`grundlagen/performance-tuning.md`](../grundlagen/performance-tuning.md), für den Zeitpunkt, an dem es
+sich wirklich lohnt.
 
 ## Zusammenfassung: Reproduzierbarkeit als Ziel
 

@@ -22,6 +22,8 @@ MySQL/MariaDB, Ziel ist die Migration auf PostgreSQL. Dieses Repo bildet beide H
 2. **Die eigentliche Migration** von der alten Produktivumgebung dorthin — mit Konzept, App-Upgrade,
    Datenbank-Engine-Wechsel und einem vollständigen Verifikations-/Produktivdaten-Leitfaden —
    [`docs/migration/`](docs/migration/README.md).
+3. **Den laufenden Betrieb danach verantworten** (Benutzer, Backups, Monitoring, künftige Upgrades) —
+   [`docs/operations/`](docs/operations/README.md).
 
 TestLink wird offiziell primär mit MySQL/MariaDB dokumentiert und containerisiert (siehe
 `docker-compose.yml` im Original-Repo). PostgreSQL wird vom Web-Installer aber vollständig unterstützt
@@ -46,8 +48,12 @@ docs/
                   (inkl. Proxmox-VM-Erstellung), Kapitel 0–9.
   migration/      Die eigentliche Migration (1.9.16/MySQL → aktuelle Version/PostgreSQL),
                   Kapitel 1–4, setzt auf installation/ auf.
-scripts/          Bash-Skripte, die installation/ 0–9 automatisieren (Referenz für Prod, oder um
-                  die Demo schnell zu wiederholen).
+  operations/     Der laufende Betrieb danach: Benutzer, Backups, Monitoring, künftige Upgrades,
+                  Alltagsprobleme, Kapitel 0–5.
+  glossar.md      Zentrales Nachschlagewerk aller Fachbegriffe aus dem gesamten Repo.
+  LERNJOURNAL.md  Vorlage, um deine eigene Lernreise durch das Projekt festzuhalten.
+scripts/          Bash-Skripte, die installation/ 0–9 und Teile von operations/ automatisieren.
+.github/workflows/  Prüft bei jedem Push automatisch, ob alle internen Doku-Links noch funktionieren.
 .env.example      Konfigurationsvariablen (Version, Domain, Passwörter, Pfade).
 ```
 
@@ -58,9 +64,11 @@ scripts/          Bash-Skripte, die installation/ 0–9 automatisieren (Referenz
 | TestLink und die einzelnen Werkzeuge erst **verstehen** willst, bevor du tippst | [`docs/grundlagen/`](docs/grundlagen/README.md), beginnend mit [testlink.md](docs/grundlagen/testlink.md) |
 | die Zielumgebung **selbst aufbauen** willst, jeden Befehl einzeln erklärt | [`docs/installation/`](docs/installation/README.md) |
 | die **eigentliche Migration** (1.9.16/MySQL → PostgreSQL) durcharbeiten willst | [`docs/migration/`](docs/migration/README.md) (setzt auf `installation/` auf) |
+| wissen willst, wie du die Instanz danach **im Alltag betreibst** (Nutzer, Backups, Upgrades) | [`docs/operations/`](docs/operations/README.md) |
+| einen Fachbegriff **schnell nachschlagen** willst, ohne die ganze Seite zu lesen | [`docs/glossar.md`](docs/glossar.md) |
 | das Prinzip schon kennst und es **automatisiert** wiederholen willst (Demo neu, zweiter Server, ...) | Skripte, siehe unten |
 
-Empfohlene Reihenfolge beim ersten Durcharbeiten: **Grundlagen → Installation → Migration.**
+Empfohlene Reihenfolge beim ersten Durcharbeiten: **Grundlagen → Installation → Migration → Operations.**
 
 ## Schnellstart (automatisiert)
 
@@ -80,6 +88,8 @@ Für alle, die die Zielumgebung nicht von Hand nachbauen, sondern per Skript auf
    [`docs/installation/07-web-installer.md`](docs/installation/07-web-installer.md) folgen.
 6. Nach erfolgreicher Installation: [`docs/installation/09-hardening-and-prod.md`](docs/installation/09-hardening-and-prod.md) durchgehen.
 7. Für die eigentliche Migration von der Produktivumgebung: [`docs/migration/`](docs/migration/README.md).
+8. Für den Betrieb danach (Backups, Monitoring, Benutzerverwaltung): [`docs/operations/`](docs/operations/README.md) —
+   Checkliste für den echten Termin: [`docs/operations/00-checkliste-produktivumzug.md`](docs/operations/00-checkliste-produktivumzug.md).
 
 ## Skripte im Detail
 
@@ -91,6 +101,8 @@ Für alle, die die Zielumgebung nicht von Hand nachbauen, sondern per Skript auf
 | `scripts/04-deploy-testlink.sh` | [5 – TestLink-Quellcode](docs/installation/05-testlink-source.md), [6 – VirtualHost](docs/installation/06-virtualhost.md) |
 | `scripts/99-lock-installer.sh` | [9 – Absichern](docs/installation/09-hardening-and-prod.md) |
 | `scripts/compare-migration-rowcounts.sh` | [Migrations-Kapitel 4 – Vollständigkeits-Check](docs/migration/04-vollstaendigkeit-produktivmigration.md) |
+| `scripts/backup-postgres.sh` | [Operations-Kapitel 2 – Backup & Restore](docs/operations/02-backup-restore.md) |
+| `scripts/check-links.py` | Prüft alle internen Doku-Links, läuft automatisch per GitHub Actions bei jedem Push |
 
 Kapitel 0 (Proxmox-VM) und 7 (Web-Installer) sind bewusst nicht automatisiert — die VM-Erstellung ist
 UI-Klickarbeit in Proxmox, der Web-Installer ein Browser-Assistent.

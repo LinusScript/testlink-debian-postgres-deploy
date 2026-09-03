@@ -32,6 +32,10 @@ Projekt kommt und wie es historisch entstanden ist. Alle anderen Seiten hier erk
 | **pgloader** | Migrationswerkzeug zwischen den beiden Datenbanken | [pgloader.md](pgloader.md) |
 | **Debian/Linux** | Das Betriebssystem, auf dem alles läuft | [debian-linux.md](debian-linux.md) |
 
+Ergänzend, werkzeugübergreifend statt pro Werkzeug: **[Performance-Tuning](performance-tuning.md)** —
+was zu tun ist, wenn die Demo-Konfiguration aus `installation/` nicht mehr reicht (PHP-FPM,
+Connection Pooling).
+
 ## Wie jede Seite aufgebaut ist
 
 Jede Seite beantwortet dieselben Fragen, in derselben Reihenfolge — damit du dir eine Routine
@@ -54,6 +58,8 @@ angewöhnst, mit der du auch **jedes zukünftige, hier nicht behandelte Werkzeug
   Schritt, mit Befehlen zum Mittippen).
 - [`docs/migration/`](../migration/README.md) = **wie** du von der alten Produktivumgebung
   (TestLink 1.9.16, MySQL/MariaDB) auf die neue umziehst.
+- [`docs/operations/`](../operations/README.md) = **wie** du die Instanz danach im laufenden Betrieb
+  verantwortest (Benutzer, Backups, Monitoring, künftige Upgrades).
 
 Empfehlung: Lies die passende Grundlagen-Seite, **bevor** du das zugehörige Installations- oder
 Migrations-Kapitel bearbeitest — dann verstehst du die Befehle dort nicht nur, sondern kannst einordnen,

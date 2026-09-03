@@ -25,23 +25,27 @@ Das offizielle `Dockerfile`/`docker-compose.yml` von TestLink ist auf MySQL zuge
 kein PostgreSQL-Pfad). Für "Debian-Server + PostgreSQL, später 1:1 in Prod" ist eine native Installation der direktere Weg
 und leichter 1:1 auf einen Produktivserver zu übertragen (Root-Server, VM, o.ä.).
 
-## Zwei Wege durch dieses Repo
+## Drei Wege durch dieses Repo
 
 | Weg | Für wen | Start |
 |---|---|---|
+| **📚 Grundlagen** | Du willst *bevor* du tippst verstehen, was PHP, Apache, PostgreSQL, MySQL/MariaDB, pgloader und Debian überhaupt sind, woher sie kommen und wofür sie da sind | [`docs/grundlagen/README.md`](docs/grundlagen/README.md) |
 | **🎓 Lernpfad** | Du willst jeden Befehl selbst tippen und verstehen (z. B. als Azubi), inkl. Erstellung der Debian-VM in Proxmox VE | [`docs/tutorial/README.md`](docs/tutorial/README.md) |
 | **⚡ Schnellstart** | Du hast das Prinzip schon verstanden (oder willst es später auf einem zweiten/Prod-Server schnell wiederholen) | Skripte unten in diesem README |
 
-Beide Wege bauen **denselben Stack** (Debian + Apache/mod_php + PostgreSQL + TestLink) auf dieselbe Art —
-der Lernpfad erklärt jeden Schritt einzeln von Hand, die Skripte automatisieren exakt das Gleiche.
+Alle drei bauen auf **demselben Stack** (Debian + Apache/mod_php + PostgreSQL + TestLink) auf — die
+Grundlagen erklären *was* die Werkzeuge sind, der Lernpfad erklärt *wie* man sie einsetzt (jeder Schritt
+einzeln von Hand), die Skripte automatisieren exakt das Gleiche. Empfohlene Reihenfolge: Grundlagen →
+Lernpfad → (später) Skripte.
 
 ## Verzeichnisstruktur
 
 ```
-docs/tutorial/  Lernpfad: jeder Schritt einzeln erklärt, inkl. Proxmox-VM-Erstellung (00 → 09)
-docs/           Kompakte Referenz: was die Skripte tun (00 → 08)
-scripts/        Bash-Skripte, die die Anleitung automatisieren
-.env.example    Konfigurationsvariablen (Version, Domain, Passwörter, Pfade)
+docs/grundlagen/  Was PHP, Apache, PostgreSQL, MySQL/MariaDB, pgloader, Debian sind und wofür sie da sind
+docs/tutorial/    Lernpfad: jeder Schritt einzeln erklärt, inkl. Proxmox-VM + Migration (00 → 13)
+docs/             Kompakte Referenz: was die Skripte tun (00 → 08)
+scripts/          Bash-Skripte, die die Anleitung automatisieren
+.env.example      Konfigurationsvariablen (Version, Domain, Passwörter, Pfade)
 ```
 
 ## Schnellstart (Demo, automatisiert)

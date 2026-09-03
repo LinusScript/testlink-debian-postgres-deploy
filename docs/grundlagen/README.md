@@ -2,15 +2,23 @@
 
 ## Warum dieser Ordner existiert
 
-In `docs/tutorial/` lernst du, **wie** man diesen Stack Schritt für Schritt aufbaut. Dieser Ordner
-beantwortet eine andere, mindestens genauso wichtige Frage: **Was ist eigentlich jedes einzelne
-Werkzeug, das wir da benutzen — und warum genau dieses und kein anderes?**
+In [`docs/installation/`](../installation/README.md) und [`docs/migration/`](../migration/README.md)
+lernst du, **wie** man diesen Stack Schritt für Schritt aufbaut bzw. migriert. Dieser Ordner beantwortet
+eine andere, mindestens genauso wichtige Frage: **Was ist eigentlich jedes einzelne Werkzeug, das wir da
+benutzen — und warum genau dieses und kein anderes?**
 
 Der Unterschied ist nicht akademisch. Wer nur eine Installationsanleitung abtippt, kann sie wiederholen,
 solange nichts Unerwartetes passiert. Wer versteht, *was* Apache, PHP, PostgreSQL und TestLink jeweils
 sind, *wofür* sie entwickelt wurden und *wie* sie zusammenspielen, kann auch dann noch handeln, wenn
 etwas vom Skript abweicht — und genau das brauchst du, wenn du perspektivisch die Verantwortung für die
 TestLink-Anwendung übernimmst.
+
+## Am besten hiermit anfangen
+
+**[Was ist TestLink? →](testlink.md)** Bevor irgendetwas anderes einen Sinn ergibt, lohnt sich diese
+Seite zuerst: was TestLink als Anwendung überhaupt ist, wofür Testmanagement gebraucht wird, woher das
+Projekt kommt und wie es historisch entstanden ist. Alle anderen Seiten hier erklären nur die
+*Werkzeuge*, mit denen TestLink betrieben wird — diese Seite erklärt die *Anwendung selbst*.
 
 ## Die Werkzeuge in unserem Stack
 
@@ -37,13 +45,16 @@ angewöhnst, mit der du auch **jedes zukünftige, hier nicht behandelte Werkzeug
 4. **Wofür wird es verwendet** — allgemein in der Praxis, und konkret in unserem TestLink-Stack.
 5. **Wichtige Begriffe** — Vokabular, das du kennen musst, um Dokumentation/Fehlermeldungen zu verstehen.
 6. **Die wichtigsten Befehle** — nicht auswendig lernen, sondern verstehen, was jeder Befehl *bewirkt*.
-7. **Bezug zu unserem Projekt** — Verweis auf die konkreten Tutorial-Kapitel, in denen du es einsetzt.
+7. **Bezug zu unserem Projekt** — Verweis auf die konkreten Kapitel, in denen du es einsetzt.
 
-## Verhältnis zu `docs/tutorial/`
+## Verhältnis zu den anderen Ordnern in diesem Repo
 
-- `docs/tutorial/` = **wie** du etwas aufbaust (Schritt für Schritt, mit Befehlen zum Mittippen).
-- `docs/grundlagen/` (hier) = **was** die einzelnen Werkzeuge sind und **warum** sie existieren.
+- [`docs/grundlagen/`](README.md) (hier) = **was** die einzelnen Werkzeuge sind und **warum** sie existieren.
+- [`docs/installation/`](../installation/README.md) = **wie** du die Zielumgebung aufbaust (Schritt für
+  Schritt, mit Befehlen zum Mittippen).
+- [`docs/migration/`](../migration/README.md) = **wie** du von der alten Produktivumgebung
+  (TestLink 1.9.16, MySQL/MariaDB) auf die neue umziehst.
 
-Empfehlung: Lies die passende Grundlagen-Seite, **bevor** du das zugehörige Tutorial-Kapitel bearbeitest
-— dann verstehst du die Befehle dort nicht nur, sondern kannst einordnen, warum sie so und nicht anders
-lauten.
+Empfehlung: Lies die passende Grundlagen-Seite, **bevor** du das zugehörige Installations- oder
+Migrations-Kapitel bearbeitest — dann verstehst du die Befehle dort nicht nur, sondern kannst einordnen,
+warum sie so und nicht anders lauten.

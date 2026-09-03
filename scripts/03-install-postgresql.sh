@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Schritt 3: PostgreSQL installieren und fuer den TestLink-Web-Installer vorbereiten.
-# Siehe docs/03-postgresql-setup.md
+# Siehe docs/installation/04-postgresql.md
 #
 # WICHTIG: Legt bewusst KEINE TestLink-Datenbank/-User an - das macht der TestLink
 # Web-Installer selbst (er verbindet sich als "postgres"-Superuser). Dieses Skript
@@ -58,7 +58,7 @@ CURRENT_LISTEN="$(sudo -u postgres psql -tAc "SHOW listen_addresses;" | tr -d '[
 echo "Aktueller Wert: listen_addresses = '${CURRENT_LISTEN}'"
 if [[ "${CURRENT_LISTEN}" != "localhost" && "${CURRENT_LISTEN}" != "*" ]]; then
   echo "WARNUNG: listen_addresses erlaubt evtl. kein TCP auf 127.0.0.1." >&2
-  echo "Pruefe ${PG_CONF_DIR}/postgresql.conf manuell (siehe docs/08-troubleshooting.md)." >&2
+  echo "Pruefe ${PG_CONF_DIR}/postgresql.conf manuell (siehe docs/installation/08-verification-debugging.md)." >&2
 fi
 
 if [[ "${CHANGED}" -eq 1 ]]; then
@@ -74,6 +74,6 @@ log "Verbindungstest per TCP mit Passwort"
 if PGPASSWORD="${PG_SUPERUSER_PASSWORD}" psql -h "${PG_HOST:-127.0.0.1}" -U postgres -c '\conninfo' >/dev/null; then
   echo "OK: TCP-Verbindung mit Passwort erfolgreich."
 else
-  echo "FEHLER: TCP-Verbindung fehlgeschlagen - siehe docs/08-troubleshooting.md" >&2
+  echo "FEHLER: TCP-Verbindung fehlgeschlagen - siehe docs/installation/08-verification-debugging.md" >&2
   exit 1
 fi

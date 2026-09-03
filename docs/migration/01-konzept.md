@@ -1,4 +1,4 @@
-# 10 – Migrationskonzept: Warum „einfach umziehen" nicht geht
+# 1 – Migrationskonzept: Warum „einfach umziehen" nicht geht
 
 ## Ausgangslage
 
@@ -51,7 +51,7 @@ TestLinks Code direkt betreffen:
 | Engine-Angaben | `ENGINE=InnoDB` | kennt PostgreSQL nicht |
 
 Deshalb pflegt TestLink **komplett getrennte SQL-Skript-Sätze** pro Datenbank — das haben wir schon in
-[Kapitel 4](04-postgresql.md) gesehen (`install/sql/postgres/`) und bei den Versions-Upgrades ist es
+[Kapitel 4](../installation/04-postgresql.md) gesehen (`install/sql/postgres/`) und bei den Versions-Upgrades ist es
 genauso: `install/sql/alter_tables/<version>/mysql/`, `.../postgres/`, `.../mssql/` — je eigene Dateien,
 weil die Befehle nicht 1:1 übertragbar sind. Es gibt **keine** Funktion in TestLink, die eine
 MySQL-Datenbank automatisch in eine PostgreSQL-Datenbank umwandelt.
@@ -67,21 +67,21 @@ Es gibt in der aktuellen Oberfläche **keinen** funktionierenden Web-Assistenten
 Datenbank-Update mehr (nur einen Link „New installation" — eine Update-Funktion existiert zwar noch als
 Code-Reste, ist aber nicht mehr über die Oberfläche erreichbar). Ein Versions-Update bedeutet also: **du
 führst die passenden SQL-Dateien selbst aus**, in der richtigen Reihenfolge. Genau das machen wir in
-[Kapitel 11](11-migration-schritt1-app-upgrade.md) — nachvollziehbar, Schritt für Schritt.
+[Migrations-Kapitel 2](02-schritt1-app-upgrade.md) — nachvollziehbar, Schritt für Schritt.
 
 ## Die Zwei-Schritte-Strategie
 
 Daraus folgt eine bewusste Reihenfolge, die **nicht willkürlich** ist:
 
 ```
-Schritt 1 (Kapitel 11)              Schritt 2 (Kapitel 12)
+Schritt 1 (Migrations-Kapitel 2)    Schritt 2 (Migrations-Kapitel 3)
 TestLink 1.9.16   →   1.9.20        TestLink 1.9.20   →   1.9.20
 MySQL             →   MySQL         MySQL             →   PostgreSQL
        (nur App-Version ändert sich)      (nur DB-Engine ändert sich)
 ```
 
 **Warum nicht beides auf einmal?** Weil dann bei einem Fehler unklar wäre, welche der beiden Änderungen
-ihn verursacht hat — genau das Debugging-Prinzip aus [Kapitel 8](08-verification-debugging.md)
+ihn verursacht hat — genau das Debugging-Prinzip aus [Kapitel 8](../installation/08-verification-debugging.md)
 ("welche Schicht ist betroffen?"), nur auf Migrationsschritte statt auf Systemschichten angewendet.
 Getrennt getestet ist jeder Schritt für sich nachvollziehbar, und wenn etwas schiefgeht, weißt du sofort,
 in welchem der beiden Schritte.
@@ -111,4 +111,4 @@ statt gleichzeitig gegen ein bewegliches Ziel zu arbeiten.
 3. Warum migrieren wir nicht direkt von "TestLink 1.9.16 auf MySQL" zu "TestLink 1.9.20 auf PostgreSQL"
    in einem Schritt?
 
-Weiter mit [Kapitel 11: Schritt 1 – TestLink 1.9.16 auf MySQL aktualisieren](11-migration-schritt1-app-upgrade.md).
+Weiter mit [Migrations-Kapitel 2: Schritt 1 – TestLink 1.9.16 auf MySQL aktualisieren](02-schritt1-app-upgrade.md).

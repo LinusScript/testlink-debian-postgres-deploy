@@ -46,7 +46,7 @@ bis zu komplexen PHP-Anwendungen wie TestLink. Alternativen: nginx (moderner, of
 bevorzugt), Caddy (automatisches HTTPS).
 
 In unserem Kontext: Apache liefert die TestLink-Oberfläche aus, reicht `.php`-Aufrufe an PHP weiter, und
-trennt über **VirtualHosts** (siehe [Kapitel 6](../tutorial/06-virtualhost.md)) verschiedene Websites
+trennt über **VirtualHosts** (siehe [Kapitel 6](../installation/06-virtualhost.md)) verschiedene Websites
 auf demselben Server voneinander.
 
 ## Wichtige Begriffe
@@ -56,7 +56,7 @@ auf demselben Server voneinander.
 - **DocumentRoot** — das Verzeichnis auf der Festplatte, aus dem ein VirtualHost Dateien ausliefert.
 - **MPM (Multi-Processing Module)** — bestimmt, *wie* Apache mehrere gleichzeitige Anfragen bearbeitet
   (`prefork` = ein Prozess pro Anfrage, `event` = asynchron/moderner) — siehe
-  [Kapitel 2](../tutorial/02-apache.md).
+  [Kapitel 2](../installation/02-apache.md).
 - **Modul** — zuschaltbare Zusatzfunktion (`mod_php`, `mod_rewrite`, `mod_ssl`, ...).
 - **`.htaccess`** — eine Konfigurationsdatei, die *innerhalb* eines Verzeichnisses Apache-Einstellungen
   überschreiben kann, ohne die zentrale Konfiguration anzufassen (nur wirksam, wenn `AllowOverride`
@@ -81,6 +81,6 @@ sudo systemctl reload apache2    # Konfiguration neu einlesen, ohne Verbindungen
 
 ## Bezug zu unserem Projekt
 
-- [Kapitel 2](../tutorial/02-apache.md) — Installation, MPM-Wechsel, warum genau dieses MPM
-- [Kapitel 6](../tutorial/06-virtualhost.md) — VirtualHost Zeile für Zeile erklärt
-- [Kapitel 8](../tutorial/08-verification-debugging.md) — Apache-Logs lesen, Fehler eingrenzen
+- [Kapitel 2](../installation/02-apache.md) — Installation, MPM-Wechsel, warum genau dieses MPM
+- [Kapitel 6](../installation/06-virtualhost.md) — VirtualHost Zeile für Zeile erklärt
+- [Kapitel 8](../installation/08-verification-debugging.md) — Apache-Logs lesen, Fehler eingrenzen

@@ -22,7 +22,7 @@ Auslöser-Problem).
 **Warum das für dich relevant ist:** TestLink ist kein kommerzielles Produkt eines einzelnen
 Unternehmens mit dediziertem Support-Team — es ist ein von Freiwilligen gepflegtes Open-Source-Projekt
 (GPL-Lizenz). Das erklärt vieles, was du im Rest dieses Repos gesehen hast: warum es keinen komfortablen
-automatischen Update-Assistenten mehr gibt (Kapitel 10), warum verschiedene Community-Tags existieren
+automatischen Update-Assistenten mehr gibt (Migrations-Kapitel 1), warum verschiedene Community-Tags existieren
 (z. B. der PHP-8-kompatible Tag, den wir verwenden), und warum du als zukünftiger Verantwortlicher
 selbst tief genug verstehen musst, wie es funktioniert — es gibt keine Support-Hotline, die das für dich
 löst.
@@ -45,6 +45,27 @@ Testfällen reicht "wir probieren mal ein bisschen rum" nicht mehr — man brauc
 TestLink bildet genau diese Struktur ab und macht sie für ein ganzes Team gemeinsam nutzbar,
 nachvollziehbar und auswertbar (Reports: wie viel Prozent der Testfälle sind für Release X bestanden?).
 
+### Ein Beispiel, damit es greifbar wird
+
+Angenommen, dein Team testet eine Login-Seite vor einem Release:
+
+1. Jemand legt in TestLink einen **Testfall** an: „Login mit falschem Passwort" — mit klaren
+   Schritten ("Benutzername eingeben, falsches Passwort eingeben, auf Login klicken") und einem
+   erwarteten Ergebnis ("Fehlermeldung 'Ungültige Zugangsdaten' erscheint").
+2. Dieser Testfall landet in einer **Test-Suite** namens „Login & Authentifizierung", zusammen mit
+   ähnlichen Testfällen (richtiges Passwort, gesperrter Account, ...).
+3. Vor dem Release wird ein **Testplan** „Release 2.4" erstellt, der diese Test-Suite (und andere)
+   enthält.
+4. Ein Tester arbeitet den Testplan ab, führt jeden Testfall aus und trägt das Ergebnis als
+   **Testlauf** ein: bestanden, fehlgeschlagen, oder blockiert (z. B. weil eine Vorbedingung nicht
+   erfüllt war).
+5. Am Ende zeigt TestLink einen Report: 47 von 50 Testfällen für Release 2.4 bestanden, 3
+   fehlgeschlagen — mit direktem Link zu den fehlgeschlagenen Testfällen samt Details.
+
+Ohne ein Werkzeug wie TestLink würde das über Excel-Tabellen oder E-Mails laufen — schnell
+unübersichtlich, sobald mehrere Personen gleichzeitig testen oder ein Testfall über mehrere
+Release-Zyklen hinweg wiederholt wird.
+
 ## Wofür wird es verwendet
 
 Allgemein: überall dort, wo Software-Qualitätssicherung (QA) strukturiert nachvollziehbar sein muss —
@@ -62,7 +83,7 @@ Repos.
   Zephyr, qTest).
 - **Testfall-Version (`tcversion`)** — TestLink versioniert Testfälle: ändert sich ein Testfall,
   entsteht eine neue Version, alte Versionen bleiben nachvollziehbar erhalten (du hast diese Tabelle in
-  Kapitel 12 als `nodes_hierarchy`/`tcversions` bereits im Datenbankschema gesehen).
+  Migrations-Kapitel 3 als `nodes_hierarchy`/`tcversions` bereits im Datenbankschema gesehen).
 - **Test-Projekt** — die oberste Organisationseinheit in TestLink, meist ein Produkt oder Team.
 - **Requirement-Spec** — eine Sammlung von Anforderungen, die mit Testfällen verknüpft werden können.
 - **Custom Fields** — von der eigenen Organisation frei definierbare Zusatzfelder an Testfällen/Projekten
@@ -78,12 +99,12 @@ Verantwortlicher sind trotzdem folgende **Orte im Code** wichtiger als einzelne 
 | `config.inc.php` | Zentrale Standard-Konfiguration (nicht direkt bearbeiten, siehe unten) |
 | `custom_config.inc.php` | **Hier** trägst du eigene Anpassungen ein — überlebt Updates, `config.inc.php` selbst nicht |
 | `config_db.inc.php` | Datenbank-Zugangsdaten, vom Installer erzeugt (siehe Kapitel 7) |
-| `install/sql/<engine>/` | Die Datenbankschema-Definitionen je Datenbanktyp (siehe Kapitel 10) |
-| `install/sql/alter_tables/<version>/` | Versions-Migrationsskripte (siehe Kapitel 11) |
-| `upload_area/` | Datei-Anhänge, falls im Dateisystem-Modus (siehe Kapitel 13) |
+| `install/sql/<engine>/` | Die Datenbankschema-Definitionen je Datenbanktyp (siehe Migrations-Kapitel 1) |
+| `install/sql/alter_tables/<version>/` | Versions-Migrationsskripte (siehe Migrations-Kapitel 2) |
+| `upload_area/` | Datei-Anhänge, falls im Dateisystem-Modus (siehe Migrations-Kapitel 4) |
 
 ## Bezug zu unserem Projekt
 
-- [Kapitel 5](../tutorial/05-testlink-source.md) — wie du die TestLink-Codebasis besorgst
-- [Kapitel 7](../tutorial/07-web-installer.md) — was beim Installieren technisch passiert
-- [Kapitel 10–13](../tutorial/10-migrationskonzept.md) — die eigentliche Versions- und Datenbank-Migration
+- [Kapitel 5](../installation/05-testlink-source.md) — wie du die TestLink-Codebasis besorgst
+- [Kapitel 7](../installation/07-web-installer.md) — was beim Installieren technisch passiert
+- [Migrations-Kapitel 1–4](../migration/01-konzept.md) — die eigentliche Versions- und Datenbank-Migration

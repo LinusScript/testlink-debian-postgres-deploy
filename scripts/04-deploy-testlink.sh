@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Schritt 4: TestLink-Quellcode holen, entpacken, Apache-VirtualHost anlegen.
-# Siehe docs/04-testlink-deployment.md
+# Siehe docs/installation/05-testlink-source.md und 06-virtualhost.md
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 source ./lib.sh
@@ -66,4 +66,4 @@ a2ensite testlink.conf >/dev/null
 systemctl reload apache2
 
 log "Fertig. TestLink liegt unter ${TL_INSTALL_DIR}, erreichbar unter http://${TL_DOMAIN}:${TL_HTTP_PORT}/"
-echo "Naechster Schritt: docs/05-web-installer-walkthrough.md (Browser auf http://${TL_DOMAIN}:${TL_HTTP_PORT}/install/ oeffnen)"
+echo "Naechster Schritt: docs/installation/07-web-installer.md (Browser auf http://${TL_DOMAIN}:${TL_HTTP_PORT}/install/ oeffnen)"

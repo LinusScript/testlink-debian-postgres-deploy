@@ -1,8 +1,8 @@
-# 13 – Vollständigkeits-Check: die echte Produktivdatenbank sauber migrieren
+# 4 – Vollständigkeits-Check: die echte Produktivdatenbank sauber migrieren
 
 ## Ziel dieses Kapitels
 
-[Kapitel 12](12-migration-schritt2-db-wechsel.md) hat dir gezeigt, **wie** `pgloader` MySQL nach
+[Migrations-Kapitel 3](03-schritt2-db-wechsel.md) hat dir gezeigt, **wie** `pgloader` MySQL nach
 PostgreSQL überträgt — mit den synthetischen 1.9.16-Standarddaten aus dem TestLink-Repo. Dieses Kapitel
 schließt die Lücke zwischen "Demo mit Testdaten" und "echte Produktivmigration": Was gehört bei
 TestLink *wirklich alles* zu "den Daten", woher bekommst du den echten Dump, und wie stellst du fest,
@@ -96,7 +96,7 @@ Jede Option hat einen konkreten Grund:
 scp testlink_prod_2026-08-31.sql <benutzer>@<demo-vm-ip>:/tmp/
 ```
 
-Auf der Demo-VM einspielen — genau wie in [Kapitel 11](11-migration-schritt1-app-upgrade.md), nur mit
+Auf der Demo-VM einspielen — genau wie in [Migrations-Kapitel 2](02-schritt1-app-upgrade.md), nur mit
 dem echten Dump statt `testlink_create_default_data.sql`:
 
 ```bash
@@ -130,7 +130,7 @@ in die **neue** `custom_config.inc.php` auf Basis der Vorlage aus dem TestLink-P
 
 ## Schritt 4: Vollständigkeits-Verifikation — ALLE Tabellen, nicht nur zwei
 
-Kapitel 12 hat exemplarisch zwei Tabellen verglichen. Für eine echte Migration reicht das nicht — die
+Migrations-Kapitel 3 hat exemplarisch zwei Tabellen verglichen. Für eine echte Migration reicht das nicht — die
 Produktivdatenbank hat rund 58 Tabellen, und jede könnte theoretisch von der Migration betroffen sein.
 Dafür gibt es in diesem Repo ein Skript, das **automatisch alle Tabellen** ermittelt und vergleicht:
 
@@ -167,7 +167,7 @@ Zeilenzahlen sagen nichts über **inhaltliche** Korrektheit aus. Ergänzend, man
 - [ ] Frischer `mysqldump` unmittelbar vor der Migration (Rollback-Basis)
 - [ ] Dump sicher übertragen, nach Testende wieder gelöscht
 - [ ] `upload_area/` kopiert, falls Dateisystem-Modus
-- [ ] `pgloader`-Lauf durchgeführt (Kapitel 12)
+- [ ] `pgloader`-Lauf durchgeführt (Migrations-Kapitel 3)
 - [ ] `./scripts/compare-migration-rowcounts.sh` — alle Tabellen stimmen überein
 - [ ] Stichproben (Anhang, Historie, Nicht-Admin-Login, Sonderzeichen) manuell geprüft
 - [ ] `custom_config.inc.php` gezielt übertragen, nicht blind kopiert
@@ -192,7 +192,7 @@ Zeilenzahlen sagen nichts über **inhaltliche** Korrektheit aus. Ergänzend, man
    liegen, ohne den Quellcode selbst zu lesen?
 3. Warum ist `--single-transaction` bei `mysqldump` wichtig, wenn während des Dumps noch jemand mit
    TestLink arbeiten könnte?
-4. Warum reicht ein Vergleich von zwei Tabellen (wie in Kapitel 12 zur Veranschaulichung) für eine echte
+4. Warum reicht ein Vergleich von zwei Tabellen (wie in Migrations-Kapitel 3 zur Veranschaulichung) für eine echte
    Migration nicht aus?
 
-Zurück zur Übersicht: [Lernpfad-Startseite](README.md).
+Zurück zur Übersicht: [Migration – Startseite](README.md).

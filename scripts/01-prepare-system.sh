@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Schritt 1: Basis-System vorbereiten (Debian).
-# Siehe docs/01-server-preparation.md
+# Siehe docs/installation/01-linux-basics.md
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 source ./lib.sh

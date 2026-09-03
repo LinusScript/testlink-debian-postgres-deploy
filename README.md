@@ -1,54 +1,70 @@
 # TestLink auf Debian mit PostgreSQL
 
-Schritt-für-Schritt-Anleitung und Automatisierungsskripte, um [TestLink](https://github.com/TestLinkOpenSourceTRMS/testlink-code)
-(Test-Management-System) auf Debian mit **PostgreSQL** als Datenbank zu installieren — zunächst als Demo, mit dem Ziel,
-den exakt gleichen Prozess später produktiv nachzubauen.
+Dokumentierte, reproduzierbare Migration von [TestLink](https://github.com/TestLinkOpenSourceTRMS/testlink-code)
+(Test-Management-System) von einer produktiven **1.9.16-Instanz auf MySQL/MariaDB** zu einer aktuellen
+Version auf **PostgreSQL**, auf **Debian** — zuerst als Demo auf einer eigenen VM getestet, mit dem Ziel,
+denselben Weg anschließend 1:1 produktiv nachzuvollziehen.
+
+## Was ist TestLink, falls du es nicht kennst?
+
+TestLink ist eine webbasierte Software, mit der Teams Testfälle für die Qualitätssicherung planen,
+organisieren, ausführen und die Ergebnisse auswerten — statt das über Excel-Tabellen zu machen. Eine
+ausführliche, allgemeinverständliche Erklärung mit Beispiel gibt es unter
+[`docs/grundlagen/testlink.md`](docs/grundlagen/testlink.md).
 
 ## Der reale Hintergrund
 
-Das ist kein rein hypothetisches Übungsprojekt: Produktiv läuft aktuell **TestLink 1.9.16 auf
-MySQL/MariaDB**, Ziel ist die Migration auf PostgreSQL. Kapitel 0–9 des Lernpfads bauen zunächst die
-**Zielumgebung** (aktuelle TestLink-Version + PostgreSQL) als Demo auf; Kapitel 10–13 bilden anschließend
-die **eigentliche Migration** nach — Konzept, App-Upgrade, DB-Engine-Wechsel und ein vollständiger
-Verifikations-/Produktivdaten-Leitfaden (Datei-Anhänge, echter `mysqldump`, alle Tabellen statt
-Stichproben) — mit Erklärung der Hintergründe, nicht nur der Befehle. Start:
-[`docs/tutorial/10-migrationskonzept.md`](docs/tutorial/10-migrationskonzept.md).
+Das ist kein rein hypothetisches Übungsprojekt: Produktiv läuft aktuell TestLink 1.9.16 auf
+MySQL/MariaDB, Ziel ist die Migration auf PostgreSQL. Dieses Repo bildet beide Hälften der Aufgabe ab:
 
-TestLink wird offiziell primär mit MySQL/MariaDB dokumentiert und containerisiert (siehe `docker-compose.yml` im Original-Repo).
-PostgreSQL wird vom Web-Installer aber vollständig unterstützt (`install/installDbInput.php`, `install/installNewDB.php`,
-`install/sql/postgres/`). Dieses Repo geht bewusst den PostgreSQL-Weg auf einem "echten" Debian-Server (kein Docker),
-weil das dem geplanten Produktiv-Setup am nächsten kommt.
+1. **Die Zielumgebung aufbauen** (Debian + Apache + PHP + PostgreSQL + aktuelle TestLink-Version) —
+   [`docs/installation/`](docs/installation/README.md).
+2. **Die eigentliche Migration** von der alten Produktivumgebung dorthin — mit Konzept, App-Upgrade,
+   Datenbank-Engine-Wechsel und einem vollständigen Verifikations-/Produktivdaten-Leitfaden —
+   [`docs/migration/`](docs/migration/README.md).
 
-## Warum kein Docker?
+TestLink wird offiziell primär mit MySQL/MariaDB dokumentiert und containerisiert (siehe
+`docker-compose.yml` im Original-Repo). PostgreSQL wird vom Web-Installer aber vollständig unterstützt
+(`install/installDbInput.php`, `install/installNewDB.php`, `install/sql/postgres/`). Dieses Repo geht
+bewusst den PostgreSQL-Weg auf einem "echten" Debian-Server (kein Docker), weil das dem geplanten
+Produktiv-Setup am nächsten kommt.
 
-Das offizielle `Dockerfile`/`docker-compose.yml` von TestLink ist auf MySQL zugeschnitten (PHP 7.4, `mysqli`-Extension,
-kein PostgreSQL-Pfad). Für "Debian-Server + PostgreSQL, später 1:1 in Prod" ist eine native Installation der direktere Weg
-und leichter 1:1 auf einen Produktivserver zu übertragen (Root-Server, VM, o.ä.).
+### Warum kein Docker?
 
-## Drei Wege durch dieses Repo
+Das offizielle `Dockerfile`/`docker-compose.yml` von TestLink ist auf MySQL zugeschnitten (PHP 7.4,
+`mysqli`-Extension, kein PostgreSQL-Pfad). Für "Debian-Server + PostgreSQL, später 1:1 in Prod" ist eine
+native Installation der direktere Weg und leichter 1:1 auf einen Produktivserver zu übertragen
+(Root-Server, VM, o. ä.).
 
-| Weg | Für wen | Start |
-|---|---|---|
-| **📚 Grundlagen** | Du willst *bevor* du tippst verstehen, was PHP, Apache, PostgreSQL, MySQL/MariaDB, pgloader und Debian überhaupt sind, woher sie kommen und wofür sie da sind | [`docs/grundlagen/README.md`](docs/grundlagen/README.md) |
-| **🎓 Lernpfad** | Du willst jeden Befehl selbst tippen und verstehen (z. B. als Azubi), inkl. Erstellung der Debian-VM in Proxmox VE | [`docs/tutorial/README.md`](docs/tutorial/README.md) |
-| **⚡ Schnellstart** | Du hast das Prinzip schon verstanden (oder willst es später auf einem zweiten/Prod-Server schnell wiederholen) | Skripte unten in diesem README |
-
-Alle drei bauen auf **demselben Stack** (Debian + Apache/mod_php + PostgreSQL + TestLink) auf — die
-Grundlagen erklären *was* die Werkzeuge sind, der Lernpfad erklärt *wie* man sie einsetzt (jeder Schritt
-einzeln von Hand), die Skripte automatisieren exakt das Gleiche. Empfohlene Reihenfolge: Grundlagen →
-Lernpfad → (später) Skripte.
-
-## Verzeichnisstruktur
+## Repo-Struktur
 
 ```
-docs/grundlagen/  Was PHP, Apache, PostgreSQL, MySQL/MariaDB, pgloader, Debian sind und wofür sie da sind
-docs/tutorial/    Lernpfad: jeder Schritt einzeln erklärt, inkl. Proxmox-VM + Migration (00 → 13)
-docs/             Kompakte Referenz: was die Skripte tun (00 → 08)
-scripts/          Bash-Skripte, die die Anleitung automatisieren
-.env.example      Konfigurationsvariablen (Version, Domain, Passwörter, Pfade)
+docs/
+  grundlagen/     Was PHP, Apache, PostgreSQL, MySQL/MariaDB, pgloader, Debian und TestLink selbst
+                  sind, woher sie kommen und wofür sie da sind — lies das zuerst.
+  installation/   Schritt-für-Schritt-Anleitung für die Zielumgebung, jeder Befehl einzeln erklärt
+                  (inkl. Proxmox-VM-Erstellung), Kapitel 0–9.
+  migration/      Die eigentliche Migration (1.9.16/MySQL → aktuelle Version/PostgreSQL),
+                  Kapitel 1–4, setzt auf installation/ auf.
+scripts/          Bash-Skripte, die installation/ 0–9 automatisieren (Referenz für Prod, oder um
+                  die Demo schnell zu wiederholen).
+.env.example      Konfigurationsvariablen (Version, Domain, Passwörter, Pfade).
 ```
 
-## Schnellstart (Demo, automatisiert)
+## Wie du dieses Repo liest
+
+| Wenn du... | dann lies... |
+|---|---|
+| TestLink und die einzelnen Werkzeuge erst **verstehen** willst, bevor du tippst | [`docs/grundlagen/`](docs/grundlagen/README.md), beginnend mit [testlink.md](docs/grundlagen/testlink.md) |
+| die Zielumgebung **selbst aufbauen** willst, jeden Befehl einzeln erklärt | [`docs/installation/`](docs/installation/README.md) |
+| die **eigentliche Migration** (1.9.16/MySQL → PostgreSQL) durcharbeiten willst | [`docs/migration/`](docs/migration/README.md) (setzt auf `installation/` auf) |
+| das Prinzip schon kennst und es **automatisiert** wiederholen willst (Demo neu, zweiter Server, ...) | Skripte, siehe unten |
+
+Empfohlene Reihenfolge beim ersten Durcharbeiten: **Grundlagen → Installation → Migration.**
+
+## Schnellstart (automatisiert)
+
+Für alle, die die Zielumgebung nicht von Hand nachbauen, sondern per Skript aufsetzen wollen:
 
 1. Debian-Server (getestet für **Debian 13 „Trixie"**) bereitstellen, per SSH einloggen.
 2. Dieses Repo auf den Server klonen.
@@ -61,32 +77,30 @@ scripts/          Bash-Skripte, die die Anleitung automatisieren
    sudo ./scripts/00-run-all.sh
    ```
 5. Browser-Installer unter `http://<server-ip-oder-domain>/install/` öffnen und der Anleitung in
-   [`docs/05-web-installer-walkthrough.md`](docs/05-web-installer-walkthrough.md) folgen.
-6. Nach erfolgreicher Installation: [`docs/06-post-install-hardening.md`](docs/06-post-install-hardening.md) durchgehen.
+   [`docs/installation/07-web-installer.md`](docs/installation/07-web-installer.md) folgen.
+6. Nach erfolgreicher Installation: [`docs/installation/09-hardening-and-prod.md`](docs/installation/09-hardening-and-prod.md) durchgehen.
+7. Für die eigentliche Migration von der Produktivumgebung: [`docs/migration/`](docs/migration/README.md).
 
-Für die Übertragung auf eine Produktivumgebung siehe [`docs/07-production-notes.md`](docs/07-production-notes.md) —
-dort stehen die Punkte, die sich zwischen Demo und Prod unterscheiden sollten (Domain/TLS, getrennter DB-Host,
-Backups, Monitoring, Updates).
+## Skripte im Detail
 
-## Anleitung im Detail
+| Skript | Entspricht Installations-Kapitel |
+|---|---|
+| `scripts/01-prepare-system.sh` | [1 – Linux-Grundlagen](docs/installation/01-linux-basics.md) |
+| `scripts/02-install-apache-php.sh` | [2 – Apache](docs/installation/02-apache.md), [3 – PHP](docs/installation/03-php.md) |
+| `scripts/03-install-postgresql.sh` | [4 – PostgreSQL](docs/installation/04-postgresql.md) |
+| `scripts/04-deploy-testlink.sh` | [5 – TestLink-Quellcode](docs/installation/05-testlink-source.md), [6 – VirtualHost](docs/installation/06-virtualhost.md) |
+| `scripts/99-lock-installer.sh` | [9 – Absichern](docs/installation/09-hardening-and-prod.md) |
+| `scripts/compare-migration-rowcounts.sh` | [Migrations-Kapitel 4 – Vollständigkeits-Check](docs/migration/04-vollstaendigkeit-produktivmigration.md) |
 
-| Schritt | Dokument | Skript |
-|---|---|---|
-| 0 | [Überblick & Architektur](docs/00-overview.md) | – |
-| 1 | [Server-Vorbereitung](docs/01-server-preparation.md) | `scripts/01-prepare-system.sh` |
-| 2 | [Apache & PHP installieren](docs/02-dependencies.md) | `scripts/02-install-apache-php.sh` |
-| 3 | [PostgreSQL einrichten](docs/03-postgresql-setup.md) | `scripts/03-install-postgresql.sh` |
-| 4 | [TestLink deployen](docs/04-testlink-deployment.md) | `scripts/04-deploy-testlink.sh` |
-| 5 | [Web-Installer durchklicken](docs/05-web-installer-walkthrough.md) | – (manuell im Browser) |
-| 6 | [Absichern nach der Installation](docs/06-post-install-hardening.md) | `scripts/99-lock-installer.sh` |
-| 7 | [Hinweise für Produktivbetrieb](docs/07-production-notes.md) | – |
-| 8 | [Troubleshooting](docs/08-troubleshooting.md) | – |
+Kapitel 0 (Proxmox-VM) und 7 (Web-Installer) sind bewusst nicht automatisiert — die VM-Erstellung ist
+UI-Klickarbeit in Proxmox, der Web-Installer ein Browser-Assistent.
 
 ## Getestete Version
 
-Standardmäßig wird der neueste Tag des Repos verwendet: **`1.9.20-20251208`** (Stand: neuester verfügbarer Tag,
-laut Changelog "partially tested with 8.5.0, with Smarty 3.x" — also der Tag mit der besten Kompatibilität zu
-modernem PHP, wie es Debian 13 mitbringt). Die Version ist in `.env` über `TL_VERSION` änderbar.
+Standardmäßig wird der neueste Tag des Repos verwendet: **`1.9.20-20251208`** (Stand: neuester verfügbarer
+Tag, laut Changelog "partially tested with 8.5.0, with Smarty 3.x" — also der Tag mit der besten
+Kompatibilität zu modernem PHP, wie es Debian 13 mitbringt). Die Version ist in `.env` über `TL_VERSION`
+änderbar.
 
 ## Lizenzhinweis
 

@@ -1,14 +1,14 @@
-# 11 – Schritt 1: TestLink 1.9.16 auf MySQL/MariaDB aktualisieren
+# 2 – Schritt 1: TestLink 1.9.16 auf MySQL/MariaDB aktualisieren
 
 ## Ziel dieses Kapitels
 
 Auf der Demo-VM eine MySQL-Datenbank mit **exakt dem Schema-Stand von TestLink 1.9.16** erzeugen (die
 Produktions-Ausgangslage nachbilden) und sie mit den offiziellen SQL-Dateien manuell auf den Stand von
-1.9.20 heben — ganz ohne PostgreSQL, das kommt erst in [Kapitel 12](12-migration-schritt2-db-wechsel.md).
+1.9.20 heben — ganz ohne PostgreSQL, das kommt erst in [Migrations-Kapitel 3](03-schritt2-db-wechsel.md).
 
 ## Warum brauchen wir jetzt zusätzlich MySQL auf der Demo-VM?
 
-Wir haben in [Kapitel 3](03-php.md) und [Kapitel 4](04-postgresql.md) bewusst PostgreSQL gewählt — das
+Wir haben in [Kapitel 3](../installation/03-php.md) und [Kapitel 4](../installation/04-postgresql.md) bewusst PostgreSQL gewählt — das
 bleibt unser **Ziel**. Um den echten Migrationsweg zu proben, müssen wir aber zuerst die **Ausgangslage**
 nachbilden, und die ist nun mal MySQL/MariaDB. Beide Datenbanken können auf derselben Demo-VM parallel
 laufen (unterschiedliche Ports: MySQL/MariaDB standardmäßig 3306, PostgreSQL 5432) — das ist auf einer
@@ -133,7 +133,7 @@ done
 ## Schritt 5: Die aktualisierte Codebasis mit dieser Datenbank verbinden
 
 Jetzt kommt der Teil, den du aus Kapitel 5–7 schon kennst — nur mit MySQL statt PostgreSQL als Ziel.
-Falls noch nicht vorhanden, TestLink `1.9.20-20251208` wie in [Kapitel 5](05-testlink-source.md)
+Falls noch nicht vorhanden, TestLink `1.9.20-20251208` wie in [Kapitel 5](../installation/05-testlink-source.md)
 herunterladen und entpacken (z. B. nach `/var/www/testlink-migration-test`, damit es deine
 PostgreSQL-Instanz aus den vorherigen Kapiteln nicht überschreibt).
 
@@ -151,7 +151,7 @@ $tlCfg->db_pass = 'DeinStarkesPasswort123!';
 ```
 
 Speichere das als `/var/www/testlink-migration-test/config_db.inc.php` und passe Besitzer/Rechte wie in
-[Kapitel 6](06-virtualhost.md) beschrieben an (`www-data:www-data`). Richte einen zweiten VirtualHost
+[Kapitel 6](../installation/06-virtualhost.md) beschrieben an (`www-data:www-data`). Richte einen zweiten VirtualHost
 dafür ein (analog Kapitel 6, anderer `ServerName`/Port), rufe die Seite im Browser auf — **kein**
 `install/`, direkt die normale TestLink-Oberfläche sollte erscheinen.
 
@@ -183,4 +183,4 @@ dieser Version — in Produktion später natürlich mit den echten Zugangsdaten 
 2. Woran erkennst du nach jedem Versionssprung, dass er erfolgreich war?
 3. Warum reicht es hier, `config_db.inc.php` von Hand zu schreiben, statt den Web-Installer zu benutzen?
 
-Weiter mit [Kapitel 12: Schritt 2 – Von MySQL zu PostgreSQL migrieren](12-migration-schritt2-db-wechsel.md).
+Weiter mit [Migrations-Kapitel 3: Schritt 2 – Von MySQL zu PostgreSQL migrieren](03-schritt2-db-wechsel.md).

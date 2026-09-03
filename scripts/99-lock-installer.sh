@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Nach erfolgreicher Installation: install/-Verzeichnis sperren.
-# Siehe docs/06-post-install-hardening.md
+# Siehe docs/installation/09-hardening-and-prod.md
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 source ./lib.sh
@@ -36,4 +36,4 @@ if [[ -f "${TL_INSTALL_DIR}/config_db.inc.php" ]]; then
   log "config_db.inc.php auf 640/www-data gesetzt."
 fi
 
-log "Fertig. Siehe docs/06-post-install-hardening.md fuer weitere Schritte (TLS etc.)."
+log "Fertig. Siehe docs/installation/09-hardening-and-prod.md fuer weitere Schritte (TLS etc.)."

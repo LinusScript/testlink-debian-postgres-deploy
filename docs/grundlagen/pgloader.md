@@ -5,7 +5,7 @@
 `pgloader` ist ein spezialisiertes Werkzeug, um Daten **aus anderen Datenbanksystemen (u. a. MySQL,
 SQLite, CSV) nach PostgreSQL zu übertragen** — inklusive automatischer Schema- und Typ-Umwandlung. In
 unserem Stack ist es das zentrale Werkzeug für den eigentlichen Datenbank-Wechsel in
-[Kapitel 12](../tutorial/12-migration-schritt2-db-wechsel.md).
+[Migrations-Kapitel 3](../migration/03-schritt2-db-wechsel.md).
 
 ## Geschichte
 
@@ -19,7 +19,7 @@ Version 3.x) — mit deutlich besserer Performance und echter Nebenläufigkeit.
 
 **Warum das für dich relevant ist:** `pgloader` ist bewusst als **Spezialwerkzeug für genau dieses
 Problem** entstanden, nicht als Allzweck-Datenbankwerkzeug — deshalb kennt es die typischen Fallstricke
-einer MySQL→PostgreSQL-Migration (siehe [Kapitel 10](../tutorial/10-migrationskonzept.md)) von Haus aus
+einer MySQL→PostgreSQL-Migration (siehe [Migrations-Kapitel 1](../migration/01-konzept.md)) von Haus aus
 und behandelt sie automatisch, statt dass du sie selbst nachbauen müsstest.
 
 ## Kernkonzept: Automatisierte Schema- und Datenübertragung
@@ -33,7 +33,7 @@ AUTO_INCREMENT        →    erkennt Automatik         →  Sequenzen erzeugen +
 ```
 
 `pgloader` **liest nur** aus der Quelle — es verändert die MySQL-Datenbank nicht. Das macht wiederholte
-Testläufe risikofrei (siehe Kapitel 12).
+Testläufe risikofrei (siehe Migrations-Kapitel 3).
 
 ## Wofür wird es verwendet
 
@@ -42,7 +42,7 @@ für einmalige Migrationsprojekte wie unseres als auch für größere, mehrstufi
 Praxis.
 
 In unserem Kontext: `pgloader` überträgt die (bereits auf die Zielversion aktualisierte) MySQL-Datenbank
-aus Kapitel 11 vollständig nach PostgreSQL — Schema und Daten in einem Arbeitsschritt.
+aus Migrations-Kapitel 2 vollständig nach PostgreSQL — Schema und Daten in einem Arbeitsschritt.
 
 ## Wichtige Begriffe
 
@@ -62,11 +62,11 @@ pgloader --version                 # installierte Version prüfen
 ```
 
 Der eigentliche "Befehl" bei `pgloader` ist meist nicht die Kommandozeile selbst, sondern der **Inhalt
-der `.load`-Datei** — siehe [Kapitel 12](../tutorial/12-migration-schritt2-db-wechsel.md) für ein
+der `.load`-Datei** — siehe [Migrations-Kapitel 3](../migration/03-schritt2-db-wechsel.md) für ein
 vollständiges, kommentiertes Beispiel.
 
 ## Bezug zu unserem Projekt
 
-- [Kapitel 12](../tutorial/12-migration-schritt2-db-wechsel.md) — vollständiger, erklärter Ablauf
-- [Kapitel 13](../tutorial/13-vollstaendigkeit-produktivmigration.md) — warum `pgloader` allein nicht
+- [Migrations-Kapitel 3](../migration/03-schritt2-db-wechsel.md) — vollständiger, erklärter Ablauf
+- [Migrations-Kapitel 4](../migration/04-vollstaendigkeit-produktivmigration.md) — warum `pgloader` allein nicht
   reicht (Datei-Anhänge außerhalb der Datenbank)

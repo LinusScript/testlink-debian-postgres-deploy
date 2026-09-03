@@ -20,7 +20,7 @@ Open-Source-Community weiterentwickelt (nicht von einem einzelnen Unternehmen ko
 heute PostgreSQLs Markenzeichen — es unterstützt sehr strikt den SQL-Standard, eigene Datentypen,
 komplexe Abfragen und gilt allgemein als besonders **korrekt und konsistent** in seinem Verhalten. Genau
 diese Strenge ist auch der Grund, warum eine MySQL-Datenbank nicht einfach "umkonfiguriert" werden kann
-(siehe [Kapitel 10](../tutorial/10-migrationskonzept.md)) — PostgreSQL interpretiert SQL an mehreren
+(siehe [Migrations-Kapitel 1](../migration/01-konzept.md)) — PostgreSQL interpretiert SQL an mehreren
 Stellen bewusst anders/strenger als MySQL.
 
 ## Kernkonzept: Relationale Datenspeicherung
@@ -33,7 +33,7 @@ speichern.
 
 PostgreSQL kennt außerdem statt "Benutzer" und "Gruppen" nur ein einheitliches Konzept: **Rollen**
 (`ROLE`) — eine Rolle kann sich einloggen (dann faktisch ein Benutzer) und/oder andere Rollen enthalten
-(dann faktisch eine Gruppe). Details dazu in [Kapitel 4](../tutorial/04-postgresql.md).
+(dann faktisch eine Gruppe). Details dazu in [Kapitel 4](../installation/04-postgresql.md).
 
 ## Wofür wird es verwendet
 
@@ -49,9 +49,9 @@ Testläufe, Benutzer, Rechte.
 - **Rolle (Role)** — PostgreSQLs einheitliches Konzept für Benutzer und Gruppen.
 - **Superuser** — die Rolle `postgres`, darf alles (Datenbanken anlegen, andere Rollen verwalten).
 - **`pg_hba.conf`** — die zentrale Zugriffssteuerungsdatei: wer darf sich von wo aus wie anmelden
-  (siehe [Kapitel 4](../tutorial/04-postgresql.md)).
+  (siehe [Kapitel 4](../installation/04-postgresql.md)).
 - **Sequenz** — PostgreSQLs Mechanismus für automatisch hochzählende ID-Spalten (das Gegenstück zu
-  MySQLs `AUTO_INCREMENT`, siehe [Kapitel 10](../tutorial/10-migrationskonzept.md)).
+  MySQLs `AUTO_INCREMENT`, siehe [Migrations-Kapitel 1](../migration/01-konzept.md)).
 - **Schema** — ein Namensraum *innerhalb* einer Datenbank (Standard: `public`) — nicht zu verwechseln
   mit "Datenbank-Schema" im allgemeinen Sinn (Tabellenstruktur).
 - **`psql`** — das Kommandozeilen-Werkzeug, um mit PostgreSQL zu interagieren.
@@ -85,6 +85,6 @@ psql <db> < backup.sql                    # SQL-Datei in eine Datenbank einspiel
 
 ## Bezug zu unserem Projekt
 
-- [Kapitel 4](../tutorial/04-postgresql.md) — Installation, Rollen, `pg_hba.conf` Zeile für Zeile
-- [Kapitel 7](../tutorial/07-web-installer.md) — wie TestLink seine PostgreSQL-Datenbank selbst anlegt
-- [Kapitel 12](../tutorial/12-migration-schritt2-db-wechsel.md) — die eigentliche Migration von MySQL
+- [Kapitel 4](../installation/04-postgresql.md) — Installation, Rollen, `pg_hba.conf` Zeile für Zeile
+- [Kapitel 7](../installation/07-web-installer.md) — wie TestLink seine PostgreSQL-Datenbank selbst anlegt
+- [Migrations-Kapitel 3](../migration/03-schritt2-db-wechsel.md) — die eigentliche Migration von MySQL

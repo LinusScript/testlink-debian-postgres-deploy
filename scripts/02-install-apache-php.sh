@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Schritt 2: Apache + PHP (mod_php, MPM prefork) installieren.
-# Siehe docs/02-dependencies.md
+# Siehe docs/installation/02-apache.md und 03-php.md
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 source ./lib.sh

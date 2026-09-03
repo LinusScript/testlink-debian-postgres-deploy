@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Vergleicht die Zeilenzahl JEDER Tabelle zwischen der MySQL-Quelle und der
 # migrierten PostgreSQL-Zieldatenbank nach einer TestLink-Migration.
-# Hintergrund und Nutzung: docs/tutorial/13-vollstaendigkeit-produktivmigration.md
+# Hintergrund und Nutzung: docs/migration/04-vollstaendigkeit-produktivmigration.md
 #
 # Zugangsdaten NICHT als Argument uebergeben (landet in Shell-History/Prozessliste),
 # sondern vorher exportieren:

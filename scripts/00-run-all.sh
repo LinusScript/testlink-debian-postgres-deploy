@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Fuehrt die Schritte 1-4 nacheinander aus (Server vorbereiten, Apache/PHP,
 # PostgreSQL, TestLink deployen). Der Web-Installer (Schritt 5) bleibt manuell
-# im Browser - siehe docs/05-web-installer-walkthrough.md.
+# im Browser - siehe docs/installation/07-web-installer.md.
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
@@ -11,4 +11,4 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 ./04-deploy-testlink.sh
 
 echo -e "\nAlle automatisierten Schritte abgeschlossen."
-echo "Weiter mit docs/05-web-installer-walkthrough.md im Browser."
+echo "Weiter mit docs/installation/07-web-installer.md im Browser."

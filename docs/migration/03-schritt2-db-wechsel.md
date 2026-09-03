@@ -1,10 +1,10 @@
-# 12 – Schritt 2: Von MySQL zu PostgreSQL migrieren
+# 3 – Schritt 2: Von MySQL zu PostgreSQL migrieren
 
 ## Ziel dieses Kapitels
 
-Die Daten aus der jetzt auf 1.9.20 aktualisierten MySQL-Datenbank (Kapitel 11) nach PostgreSQL
+Die Daten aus der jetzt auf 1.9.20 aktualisierten MySQL-Datenbank (Migrations-Kapitel 2) nach PostgreSQL
 übertragen — Schema **und** Inhalte — sodass am Ende dieselbe TestLink-Instanz auf der
-PostgreSQL-Umgebung aus [Kapitel 3–7](03-php.md) läuft.
+PostgreSQL-Umgebung aus [Kapitel 3–7](../installation/03-php.md) läuft.
 
 ## Warum reicht "TestLink neu installieren und Daten von Hand eintippen" nicht?
 
@@ -12,17 +12,17 @@ Bei einer Demo mit ein paar Testfällen vielleicht — aber die Produktivinstanz
 Projekte, Testfälle mit Historie, Testläufe, Benutzer mit Rechten, ggf. Anhänge. Das von Hand zu
 übertragen ist bei realistischen Datenmengen weder praktikabel noch fehlerfrei. Wir brauchen ein
 Werkzeug, das **Schema und Daten automatisiert überträgt** und dabei die Typunterschiede aus
-[Kapitel 10](10-migrationskonzept.md) korrekt behandelt.
+[Migrations-Kapitel 1](01-konzept.md) korrekt behandelt.
 
 ## Was macht `pgloader`, und warum genau das?
 
 [`pgloader`](https://pgloader.io/) ist ein spezialisiertes Werkzeug für genau diesen Fall: Es verbindet
 sich mit einer MySQL-Quelle, liest deren Schema **und** Daten, erzeugt daraus automatisch ein passendes
-PostgreSQL-Schema (inklusive der Typ-Übersetzungen aus Kapitel 10 — `AUTO_INCREMENT` → Sequenz,
+PostgreSQL-Schema (inklusive der Typ-Übersetzungen aus Migrations-Kapitel 1 — `AUTO_INCREMENT` → Sequenz,
 `TINYINT(1)` → `BOOLEAN`, Zeichensatz-Konvertierung) und kopiert die Daten in einem Rutsch. Am Ende
 liefert es einen Bericht: wie viele Zeilen pro Tabelle migriert wurden, und ob es Warnungen/Fehler gab.
 
-Das ist der Grund, warum wir in [Kapitel 11](11-migration-schritt1-app-upgrade.md) zuerst die
+Das ist der Grund, warum wir in [Migrations-Kapitel 2](02-schritt1-app-upgrade.md) zuerst die
 App-Version aktualisiert haben: `pgloader` migriert 1:1, was in der Quelle vorhanden ist — wenn die
 Quelle bereits auf 1.9.20-Schema-Stand ist, landet automatisch auch das 1.9.20-Schema in PostgreSQL,
 passend zu dem, was TestLink 1.9.20-20251208 erwartet.
@@ -39,7 +39,7 @@ sudo apt-get install -y pgloader
 Wichtig: **nicht** über den TestLink-Web-Installer (der würde ein leeres 1.9.20-Postgres-Schema selbst
 erzeugen — wir wollen aber, dass `pgloader` das Schema erzeugt, exakt abgeleitet aus der MySQL-Quelle).
 Stattdessen legst du nur eine **leere** Datenbank an, mit dem PostgreSQL-Superuser aus
-[Kapitel 4](04-postgresql.md):
+[Kapitel 4](../installation/04-postgresql.md):
 
 ```bash
 sudo -u postgres createdb testlink_migrated
@@ -75,7 +75,7 @@ Kurz erklärt:
   bei einem zweiten Testlauf), werden sie vorher verworfen und sauber neu angelegt — praktisch für
   wiederholte Testläufe auf der Demo-VM.
 - `reset sequences` — nach dem Kopieren der Daten die PostgreSQL-Sequenzen (der Ersatz für
-  `AUTO_INCREMENT`, siehe Kapitel 10) auf den nächsten freien Wert setzen, damit neue Datensätze nach
+  `AUTO_INCREMENT`, siehe Migrations-Kapitel 1) auf den nächsten freien Wert setzen, damit neue Datensätze nach
   der Migration nicht mit vorhandenen IDs kollidieren.
 - `downcase identifiers` — Tabellen-/Spaltennamen in Kleinschreibung, PostgreSQLs Konvention (TestLinks
   eigenes `install/sql/postgres/`-Schema verwendet ebenfalls durchgängig Kleinschreibung).
@@ -121,7 +121,7 @@ sudo -u postgres psql -d testlink_migrated -c "
 "
 ```
 
-Danach `config_db.inc.php` deiner TestLink-Instanz (dieselbe Codebasis, mit der du in Kapitel 11 schon
+Danach `config_db.inc.php` deiner TestLink-Instanz (dieselbe Codebasis, mit der du in Migrations-Kapitel 2 schon
 gegen MySQL gearbeitet hast) auf PostgreSQL umstellen:
 
 ```php
@@ -144,13 +144,13 @@ Datenbank-Migrationen am ehesten sichtbar werden.
 `pgloader` **liest nur** aus MySQL, es verändert die Quelle nicht. Das heißt: Wenn in PostgreSQL etwas
 nicht stimmt, kannst du `testlink_migrated` löschen und die Migration beliebig oft wiederholen, ohne
 Datenverlust an der Quelle zu riskieren — derselbe Backup-Gedanke wie in
-[Kapitel 9](09-hardening-and-prod.md) gilt auch hier für den echten Migrationstermin: Vor dem echten
+[Kapitel 9](../installation/09-hardening-and-prod.md) gilt auch hier für den echten Migrationstermin: Vor dem echten
 Umzug einen frischen MySQL-Dump als Fallback sichern, dann erst migrieren.
 
 ## Was du gelernt hast
 
 - `pgloader` überträgt Schema und Daten automatisiert zwischen unterschiedlichen Datenbanksystemen und
-  löst dabei die Typunterschiede aus Kapitel 10 auf.
+  löst dabei die Typunterschiede aus Migrations-Kapitel 1 auf.
 - Weil Schritt 1 zuerst die App-Version aktualisiert hat, migriert `pgloader` in Schritt 2 direkt in ein
   bekanntes, korrektes Ziel-Schema.
 - Ein Migrationstool, das nur liest statt die Quelle zu verändern, macht wiederholte Testläufe risikofrei.
@@ -168,8 +168,8 @@ Umzug einen frischen MySQL-Dump als Fallback sichern, dann erst migrieren.
 
 ## Von der Demo zur echten Migration
 
-Die Kapitel 10–12 haben dir den kompletten **Mechanismus** gezeigt — mit synthetischen
+Die Migrations-Kapitel 1–3 haben dir den kompletten **Mechanismus** gezeigt — mit synthetischen
 1.9.16-Standarddaten statt echten Produktivdaten. Bei echten Daten kommen aber ein paar Dinge dazu, die
 mit Testdaten nicht auffallen (Datei-Anhänge außerhalb der Datenbank, Zeichensatz-Fallstricke, eine
 lückenlose statt stichprobenartige Verifikation) — das ist genau das Thema von
-[Kapitel 13: Vollständigkeits-Check](13-vollstaendigkeit-produktivmigration.md).
+[Migrations-Kapitel 4: Vollständigkeits-Check](04-vollstaendigkeit-produktivmigration.md).

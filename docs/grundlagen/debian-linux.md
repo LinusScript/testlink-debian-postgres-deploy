@@ -80,6 +80,6 @@ Bash-Skripting), unabhängig von diesem konkreten TestLink-Projekt.
 
 ## Bezug zu unserem Projekt
 
-- [Kapitel 0](../tutorial/00-proxmox-vm.md) — die Debian-VM in Proxmox erstellen
-- [Kapitel 1](../tutorial/01-linux-basics.md) — die Linux-Grundlagen, die du für den Rest des
+- [Kapitel 0](../installation/00-proxmox-vm.md) — die Debian-VM in Proxmox erstellen
+- [Kapitel 1](../installation/01-linux-basics.md) — die Linux-Grundlagen, die du für den Rest des
   Lernpfads brauchst

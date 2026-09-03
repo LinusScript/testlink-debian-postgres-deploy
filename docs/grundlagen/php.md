@@ -55,12 +55,12 @@ In unserem Kontext: TestLink **ist** PHP-Code. Jede `.php`-Datei im TestLink-Ver
 - **Interpreter** — das Programm, das PHP-Code zur Laufzeit liest und ausführt (kein separater
   Kompilierschritt wie bei Java/C nötig).
 - **Erweiterung/Extension** (z. B. `pgsql`, `gd`, `curl`) — zusätzliche Fähigkeiten, die PHP nicht "im
-  Kern" mitbringt, sondern gezielt dazu installiert werden (siehe [Kapitel 3](../tutorial/03-php.md)).
+  Kern" mitbringt, sondern gezielt dazu installiert werden (siehe [Kapitel 3](../installation/03-php.md)).
 - **`php.ini`** — die zentrale Konfigurationsdatei (Speicherlimits, Timeouts, welche Erweiterungen aktiv
   sind).
 - **`mod_php`** — die Variante, bei der PHP direkt in den Apache-Prozess eingebettet läuft (unser
   Setup) — Alternative: **PHP-FPM**, ein eigenständiger PHP-Prozess-Pool (siehe
-  [Kapitel 9](../tutorial/09-hardening-and-prod.md)).
+  [Kapitel 9](../installation/09-hardening-and-prod.md)).
 - **Session** — ein Mechanismus, mit dem PHP sich zwischen mehreren Anfragen "merkt", wer eingeloggt
   ist (TestLinks Login basiert darauf).
 
@@ -78,7 +78,7 @@ installierst/aktivierst Erweiterungen über `apt`/`a2enmod` (siehe Kapitel 3).
 
 ## Bezug zu unserem Projekt
 
-- [Kapitel 3](../tutorial/03-php.md) — PHP installieren, Erweiterungen, warum welche
-- [Kapitel 2](../tutorial/02-apache.md) — warum `mod_php` ein bestimmtes Apache-MPM erzwingt
-- [Kapitel 10](../tutorial/10-migrationskonzept.md) — warum die alte TestLink-Version (1.9.16) mit
+- [Kapitel 3](../installation/03-php.md) — PHP installieren, Erweiterungen, warum welche
+- [Kapitel 2](../installation/02-apache.md) — warum `mod_php` ein bestimmtes Apache-MPM erzwingt
+- [Migrations-Kapitel 1](../migration/01-konzept.md) — warum die alte TestLink-Version (1.9.16) mit
   moderner PHP-Version (8.4) Probleme macht

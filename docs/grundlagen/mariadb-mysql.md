@@ -31,7 +31,7 @@ Projekt bedeutet das: Alles, was du über "MySQL" in TestLinks eigener Dokumenta
 
 Wie PostgreSQL ist MySQL/MariaDB relational — Tabellen, Zeilen, Spalten, Fremdschlüssel. Der wichtigste
 konzeptionelle Unterschied zu PostgreSQL, den du für die Migration verstehen musst (ausführlich in
-[Kapitel 10](../tutorial/10-migrationskonzept.md)):
+[Migrations-Kapitel 1](../migration/01-konzept.md)):
 
 | | MySQL/MariaDB | PostgreSQL |
 |---|---|---|
@@ -46,8 +46,8 @@ Allgemein: extrem verbreitet im Web-Bereich (WordPress, viele klassische PHP-Anw
 einfache Einrichtung und gute Performance bei klassischen Lese-lastigen Web-Workloads.
 
 In unserem Kontext: MariaDB bildet die **Ausgangslage** nach — die TestLink-1.9.16-Produktivdatenbank,
-die wir in [Kapitel 11](../tutorial/11-migration-schritt1-app-upgrade.md) zunächst app-seitig
-aktualisieren, bevor wir in Kapitel 12 die Datenbank-Engine wechseln.
+die wir in [Migrations-Kapitel 2](../migration/02-schritt1-app-upgrade.md) zunächst app-seitig
+aktualisieren, bevor wir in Migrations-Kapitel 3 die Datenbank-Engine wechseln.
 
 ## Wichtige Begriffe
 
@@ -59,7 +59,7 @@ aktualisieren, bevor wir in Kapitel 12 die Datenbank-Engine wechseln.
   dem angemeldeten Linux-Benutzer, ohne Passwort.
 - **`information_schema`** — eine besondere, immer vorhandene Datenbank mit Metadaten über alle
   anderen Datenbanken (z. B. welche Tabellen existieren — nutzen wir in
-  [Kapitel 13](../tutorial/13-vollstaendigkeit-produktivmigration.md)).
+  [Migrations-Kapitel 4](../migration/04-vollstaendigkeit-produktivmigration.md)).
 
 ## Die wichtigsten Befehle
 
@@ -84,7 +84,7 @@ DESCRIBE attachments;
 
 ## Bezug zu unserem Projekt
 
-- [Kapitel 11](../tutorial/11-migration-schritt1-app-upgrade.md) — MariaDB installieren, Ausgangslage
+- [Migrations-Kapitel 2](../migration/02-schritt1-app-upgrade.md) — MariaDB installieren, Ausgangslage
   nachbilden, Versions-Upgrade durchführen
-- [Kapitel 13](../tutorial/13-vollstaendigkeit-produktivmigration.md) — einen echten Produktivdump
+- [Migrations-Kapitel 4](../migration/04-vollstaendigkeit-produktivmigration.md) — einen echten Produktivdump
   korrekt exportieren
